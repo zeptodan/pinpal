@@ -6,9 +6,11 @@ import { Notes } from "@/utils/types";
 import { supabase } from "@/lib/supabase";
 import dynamic from "next/dynamic";
 import Note from "@/components/Note";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 const Map = dynamic(() => import("@/components/Map"), { ssr: false });
 export default function Home() {
-  const { isAuthenticated,loading,logout } = useAuth();
+  const { isAuthenticated,loading } = useAuth();
   const router = useRouter();
   const [markers, setMarkers] = useState<Notes[]>([]);
   const addMarker = async (lat: number, lon: number,message: string) => {
@@ -57,21 +59,30 @@ export default function Home() {
   if (!isAuthenticated && loading) {
     return <div>Loading...</div>;
   }
+  if (!isAuthenticated) {
+    return null; // Redirect handled in useEffect
+  }
   return (
-    <div className="w-full p-6 flex flex-col items-center">
-      <h1>Welcome to the Home Page</h1>
-      <button onClick={logout}>Logout</button>
-      <div className="aspect-square w-1/2">
-        <Map markers={markers} addMarker={addMarker} />
-      </div>
-      <div className="mt-4 w-full">
-        <h2 className="font-bold text-lg">Your Notes</h2>
-        <div className="flex flex-col">
-          {markers.map((marker) => (
-            <Note key={marker.id} note={marker} updateMarker={updateMarker} deleteMarker={deleteMarker} />
-          ))}
+    <>
+      <Navbar />
+      <h1 className="mt-8 text-3xl font-bold text-center w-full">Your Journal</h1>
+      <div className="w-full p-6 flex flex-col items-center">
+        <div className="relative aspect-square w-1/2 mt-4 z-0">
+          <Map markers={markers} addMarker={addMarker} />
+        </div>
+        <div className="mt-4 w-full">
+          <h2 className="font-bold text-2xl my-2 ml-2">Your Pins</h2>
+          <div className="flex flex-col">
+            {markers.map((marker) => (
+              <Note key={marker.id} note={marker} updateMarker={updateMarker} deleteMarker={deleteMarker} />
+            ))}
+            {markers.length === 0 && (
+              <p className="text-center text-darkBrown">No notes available. Click on the map to add a new note.</p>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }

@@ -3,7 +3,7 @@ import { useAuth } from "@/contexts/authContext";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 export default function Register() {
-    const { register,error,isAuthenticated } = useAuth();
+    const { register,error } = useAuth();
     const router = useRouter();
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();

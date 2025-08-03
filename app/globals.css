@@ -10,6 +10,6 @@ body {
 }
 @layer base {
   body {
-    @apply text-black bg-amber-50 text-darkBrown;
+    @apply bg-amber-50 text-darkBrown overflow-x-hidden;
   }
 }
