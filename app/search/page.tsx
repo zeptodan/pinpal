@@ -5,11 +5,12 @@ import { useSearchParams } from "next/navigation";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { useAuth } from "@/contexts/authContext";
+import Router from "next/router";
 export default function SearchPage() {
     const [results, setResults] = useState<{ id: string; username: string; avatarUrl: string; status: string }[]>([]);
     const searchParams = useSearchParams();
     const query = searchParams.get("query");
-    const { userId } = useAuth()
+    const { userId, isAuthenticated, loading } = useAuth()
     const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         const userId = e.currentTarget.parentElement?.id;
@@ -51,6 +52,13 @@ export default function SearchPage() {
             fetchResults();
         }
     }, []);
+    if (!isAuthenticated && loading) {
+        return null; // Redirect handled in useAuth
+    }
+    if (!isAuthenticated) {
+        Router.push("/login");
+        return null; // Redirect to login
+    }
     return (
         <div className="flex flex-col min-h-screen">
             <Navbar />
@@ -66,6 +74,9 @@ export default function SearchPage() {
                             <button className="bg-darkBrown rounded-sm px-4 py-2 hover:bg-darkBrown/90 text-amber-50 cursor-pointer" onClick={handleClick} disabled={user.status !== "not_friends"}>{user.status === "accepted" ? "Friends" : user.status === "pending" ? "Request Sent" : "Send Request"}</button>
                         </div>
                     ))}
+                    {results.length === 0 && (
+                        <p className="text-center text-darkBrown">No results found for "{query}".</p>
+                    )}
                 </div>
             </div>
             <Footer />
