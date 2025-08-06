@@ -7,7 +7,7 @@ import { supabase } from "@/lib/supabase"
 import { LuMapPin } from "react-icons/lu"
 import { Notes } from "@/utils/types"
 import Map from "@/components/Map"
-export default function chat() {
+export default function Chat() {
     const { isAuthenticated, loading, userId } = useAuth();
     const { receiverId } = useParams()
     const [receiver, setReceiver] = useState<{ id: string; username: string; avatar_url: string } | null>(null);
