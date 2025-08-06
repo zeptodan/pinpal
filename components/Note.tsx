@@ -25,7 +25,7 @@ export default function Note({ note, updateMarker, deleteMarker }: { note: Notes
         <div id={`${note.id}`} className="border border-darkBrown rounded p-4 mb-2 w-full flex justify-between">
             <div className="w-full">
                 <p>Created At: {new Date(note.created_at).toLocaleString()}</p>
-                <p>Location: ({note.lat}, {note.lon})</p>
+                <p>Location: ({Math.round(note.lat)}, {Math.round(note.lon)})</p>
                 <div className="flex items-start w-full gap-0.5">
                     <p className="pt-0.5">Note:</p>
                     <textarea ref={textAreaRef} className={`w-1/2 resize-none overflow-hidden border-2 rounded px-1 pb-1 ${editing ? "border-darkBrown" : "border-transparent"} `} value={message} onChange={(e) => setMessage(e.target.value)} disabled={!editing} />

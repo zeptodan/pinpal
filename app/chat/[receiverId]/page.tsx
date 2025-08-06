@@ -143,7 +143,7 @@ export default function chat() {
                     </form>
                 </div>
             </div>
-            <div className={`fixed top-1/2 left-1/2 w-md aspect-square -translate-x-1/2 -translate-y-1/2 ${isMapOpen ? "" : "hidden"} z-40`}>
+            <div className={`fixed top-1/2 left-1/2 sm:w-md w-xs aspect-square -translate-x-1/2 -translate-y-1/2 ${isMapOpen ? "" : "hidden"} z-40`}>
                 <Map markers={markers} addMarker={handleSubmit} />
             </div>
         </div>

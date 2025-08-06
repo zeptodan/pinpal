@@ -67,7 +67,7 @@ export default function Home() {
       <Navbar />
       <h1 className="mt-8 text-3xl font-bold text-center w-full">Your Journal</h1>
       <div className="w-full p-6 flex flex-col items-center">
-        <div className="relative aspect-square w-1/2 mt-4 z-0">
+        <div className="relative aspect-square sm:w-1/2 w-full mt-4 z-0">
           <Map markers={markers} addMarker={addMarker} />
         </div>
         <div className="mt-4 w-full">
