@@ -100,12 +100,9 @@ const Navbar = () => {
             </div>
             <div className='fixed h-screen w-1/2 overflow-hidden bg-darkBrown top-16 right-0 z-20 transition-transform duration-300 ease-in-out' style={{transform: isMobileMenuOpen ? 'translateX(0)' : 'translateX(100%)'}}>
                 <div className='flex flex-col items-center h-full space-y-4 p-4'>
-                    <a href="/movielist/popular" className='text-2xl lg:text-3xl font-bold my-4 hover:text-crimsonRed'>Popular</a>
-                    <a href="/movielist/top_rated" className='text-2xl lg:text-3xl font-bold my-4 hover:text-crimsonRed'>Top Rated</a>
-                    <h2 className='text-xl lg:text-2xl font-bold my-4'>Genres</h2>
-                    <ul className='lg:text-xl gap-4 grid grid-cols-2 my-2'>
-                        <li><Link href="" className=''>thing</Link></li>
-                    </ul>
+                    <a href="/" className='text-2xl lg:text-3xl font-bold my-4'>Home</a>
+                    <a href="/requests" className='text-2xl lg:text-3xl font-bold my-4'>Requests</a>
+                    <a href="/chat" className='text-2xl lg:text-3xl font-bold my-4'>Chat</a>
                 </div>
             </div>
             {isImageOpen && (

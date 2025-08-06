@@ -8,6 +8,13 @@
 body {
   font-family: var(--font-sans);
 }
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 @layer base {
   body {
     @apply bg-amber-50 text-darkBrown overflow-x-hidden;

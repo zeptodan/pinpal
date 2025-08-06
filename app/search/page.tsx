@@ -5,10 +5,11 @@ import { useSearchParams } from "next/navigation";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { useAuth } from "@/contexts/authContext";
-import Router from "next/router";
+import {useRouter} from "next/navigation";
 export default function SearchPage() {
     const [results, setResults] = useState<{ id: string; username: string; avatarUrl: string; status: string }[]>([]);
     const searchParams = useSearchParams();
+    const router = useRouter();
     const query = searchParams.get("query");
     const { userId, isAuthenticated, loading } = useAuth()
     const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -56,7 +57,7 @@ export default function SearchPage() {
         return null; // Redirect handled in useAuth
     }
     if (!isAuthenticated) {
-        Router.push("/login");
+        router.push("/login");
         return null; // Redirect to login
     }
     return (

@@ -4,10 +4,11 @@ import Footer from "@/components/Footer";
 import { useAuth } from "@/contexts/authContext";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
-import Router from "next/router";
+import {useRouter} from "next/navigation";
 export default function Page() {
     const { isAuthenticated, loading, userId } = useAuth();
     const [results, setResults] = useState<{ uuid1: string; users: { id: string; username: string; avatar_url: string } }[]>([]);
+    const router = useRouter();
     useEffect(() => {
         const fetchResults = async () => {
             const { data,error } = await supabase
@@ -34,8 +35,6 @@ export default function Page() {
         };
         fetchResults();
     }, [userId]);
-    useEffect(() => {
-}, [results])
     const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         const userId = e.currentTarget.parentElement?.id;
@@ -48,7 +47,7 @@ export default function Page() {
         return null; // Redirect handled in useAuth
     }
     if (!isAuthenticated) {
-        Router.push("/login");
+        router.push("/login");
         return null; // Redirect to login
     }
     return (
