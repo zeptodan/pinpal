@@ -76,7 +76,7 @@ export default function SearchPage() {
                         </div>
                     ))}
                     {results.length === 0 && (
-                        <p className="text-center text-darkBrown">No results found for "{query}".</p>
+                        <p className="text-center text-darkBrown">No results found for {query}.</p>
                     )}
                 </div>
             </div>
